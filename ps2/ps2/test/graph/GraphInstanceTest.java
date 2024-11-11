@@ -86,56 +86,56 @@ public abstract class GraphInstanceTest {
 
     @Test
     public void testInitialVerticesEmpty() {
-        Graph<String> graph = emptyInstance();
-        assertEquals("Expected new graph to have no vertices", Collections.emptySet(), graph.vertices());
+        Graph<String> graphInstance = emptyInstance();
+        assertEquals("Expected new graph to have no vertices", Collections.emptySet(), graphInstance.vertices());
     }
     
     @Test
     public void testAddVertex() {
-        Graph<String> graph = emptyInstance();
-        assertTrue("Expected true when adding new vertex", graph.add("A"));
-        assertTrue("Expected vertex A to be in graph", graph.vertices().contains("A"));
+        Graph<String> graphInstance = emptyInstance();
+        assertTrue("Expected true when adding new vertex", graphInstance.add("VertexA"));
+        assertTrue("Expected vertex 'VertexA' to be in graph", graphInstance.vertices().contains("VertexA"));
     }
 
     @Test
     public void testAddDuplicateVertex() {
-        Graph<String> graph = emptyInstance();
-        graph.add("A");
-        assertFalse("Expected false when adding duplicate vertex", graph.add("A"));
-        assertEquals("Expected only 1 vertex in the graph", 1, graph.vertices().size());
+        Graph<String> graphInstance = emptyInstance();
+        graphInstance.add("VertexA");
+        assertFalse("Expected false when adding duplicate vertex", graphInstance.add("VertexA"));
+        assertEquals("Expected only 1 vertex in the graph", 1, graphInstance.vertices().size());
     }
 
     @Test
     public void testSetEdge() {
-        Graph<String> graph = emptyInstance();
-        graph.add("A");
-        graph.add("B");
-        int prevWeight = graph.set("A", "B", 5);
-        assertEquals("Expected previous weight to be 0", 0, prevWeight);
-        Map<String, Integer> targets = graph.targets("A");
-        assertTrue("Expected target B in targets of A", targets.containsKey("B"));
-        assertEquals("Expected edge weight from A to B to be 5", (Integer) 5, targets.get("B"));
+        Graph<String> graphInstance = emptyInstance();
+        graphInstance.add("VertexA");
+        graphInstance.add("VertexB");
+        int previousWeight = graphInstance.set("VertexA", "VertexB", 5);
+        assertEquals("Expected previous weight to be 0", 0, previousWeight);
+        Map<String, Integer> outgoingEdges = graphInstance.targets("VertexA");
+        assertTrue("Expected target 'VertexB' in targets of 'VertexA'", outgoingEdges.containsKey("VertexB"));
+        assertEquals("Expected edge weight from 'VertexA' to 'VertexB' to be 5", (Integer) 5, outgoingEdges.get("VertexB"));
     }
 
     @Test
     public void testRemoveVertex() {
-        Graph<String> graph = emptyInstance();
-        graph.add("A");
-        assertTrue("Expected true when removing existing vertex", graph.remove("A"));
-        assertFalse("Expected vertex A to be removed", graph.vertices().contains("A"));
+        Graph<String> graphInstance = emptyInstance();
+        graphInstance.add("VertexA");
+        assertTrue("Expected true when removing existing vertex", graphInstance.remove("VertexA"));
+        assertFalse("Expected vertex 'VertexA' to be removed", graphInstance.vertices().contains("VertexA"));
     }
 
 //    @Test
 //    public void testSourcesAndTargets() {
-//        Graph<String> graph = emptyInstance();
-//        graph.add("A");
-//        graph.add("B");
-//        graph.set("A", "B", 5);
-//        Map<String, Integer> sources = graph.sources("B");
-//        assertTrue("Expected source A in sources of B", sources.containsKey("A"));
-//        assertEquals("Expected edge weight from A to B to be 5", (Integer) 5, sources.get("A"));
-//        Map<String, Integer> targets = graph.targets("A");
-//        assertTrue("Expected target B in targets of A", targets.containsKey("B"));
-//        assertEquals("Expected edge weight from A to B to be 5", (Integer) 5, targets.get("B"));
+//        Graph<String> graphInstance = emptyInstance();
+//        graphInstance.add("VertexA");
+//        graphInstance.add("VertexB");
+//        graphInstance.set("VertexA", "VertexB", 5);
+//        Map<String, Integer> sourceEdges = graphInstance.sources("VertexB");
+//        assertTrue("Expected source 'VertexA' in sources of 'VertexB'", sourceEdges.containsKey("VertexA"));
+//        assertEquals("Expected edge weight from 'VertexA' to 'VertexB' to be 5", (Integer) 5, sourceEdges.get("VertexA"));
+//        Map<String, Integer> outgoingEdges = graphInstance.targets("VertexA");
+//        assertTrue("Expected target 'VertexB' in targets of 'VertexA'", outgoingEdges.containsKey("VertexB"));
+//        assertEquals("Expected edge weight from 'VertexA' to 'VertexB' to be 5", (Integer) 5, outgoingEdges.get("VertexB"));
 //    }
 }
